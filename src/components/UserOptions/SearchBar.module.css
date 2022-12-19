@@ -19,3 +19,9 @@
 .search input::placeholder {
   color: #aaa;
 }
+
+@media only screen and (max-width: 31.25em) {
+  .search input {
+    width: 20rem;
+  }
+}

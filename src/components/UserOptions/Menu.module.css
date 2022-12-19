@@ -1,0 +1,33 @@
+.menu {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  z-index: 100000;
+}
+.bar {
+  display: block;
+  width: 2rem;
+  height: 3px;
+  background-color: var(--color-grey-5);
+  transform: translateY(4px) rotate(0);
+  transition: all 0.4s;
+}
+
+.bar::before {
+  display: block;
+  content: "";
+  width: 2rem;
+  height: 3px;
+  background-color: var(--color-grey-5);
+  transform: translateY(-7px) rotate(0);
+  transition: all 0.4s;
+}
+
+.menu__open .bar {
+  transform: translateY(0) rotate(45deg);
+}
+.menu__open .bar::before {
+  transform: translateY(0) rotate(-90deg);
+}
