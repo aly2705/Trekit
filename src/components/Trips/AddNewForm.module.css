@@ -1,0 +1,92 @@
+.form {
+  width: 100%;
+  height: 40rem;
+  padding: 4rem 5rem;
+  font-size: 1.6rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  column-gap: 3.5rem;
+  row-gap: 1rem;
+}
+
+.form h2 {
+  font-size: 2.4rem;
+  grid-column: 1/ -1;
+  align-self: center;
+  justify-self: start;
+}
+
+.form__active {
+  bottom: 0;
+}
+
+.form__close {
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.form__close svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.form__submit {
+  grid-column: 1/ -1;
+  align-self: center;
+  justify-self: end;
+}
+
+.form__description {
+  grid-column: 1 / -1;
+}
+
+.form__group {
+  display: grid;
+}
+.form__group label {
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.form__group textarea {
+  resize: none;
+  width: 100%;
+  height: 10rem;
+}
+
+.form__group input,
+.form__group textarea {
+  font-size: 1.6rem;
+  font-family: inherit;
+  border: 2px solid var(--color-grey-3);
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.form__group input:focus,
+.form__group textarea:focus {
+  border-color: var(--color-primary-tint);
+}
+
+@media only screen and (max-width: 37.5em) {
+  .form {
+    grid-template-columns: 1fr;
+    height: 70vh;
+    padding: 4rem 6rem;
+  }
+}
+@media only screen and (max-width: 31.25em) {
+  .form {
+    padding: 4rem 5rem;
+  }
+}

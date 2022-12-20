@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap");
+
 :root {
   --color-primary: #2d77ee;
   --color-primary-tint: #96bbf7;
   --color-primary-shade: #1f53a7;
   --color-grey-1: #f1f3f5;
   --color-grey-2: #dee2e6;
-  --color-grey-3: #a9b8c9;
+  --color-grey-3: #ced4da;
   --color-grey-4: #495057;
   --color-grey-5: #888;
 
@@ -17,7 +18,7 @@
 
   --bp-big-desktop: 112.5em; /*1800px*/
   --bp-tab-land: 75em; /*1200px*/
-  --bp-tab-port: 56.25em; /*900px*/
+  --bp-tab-port: 58.125em; /*930px*/
   --bp-phone: 37.5em; /*600px*/
   --bp-phone-small: 31.25em;
 }
@@ -37,7 +38,7 @@ html {
   }
 }
 
-@media only screen and (max-width: 56.25em) {
+@media only screen and (max-width: 58.125em) {
   html {
     font-size: 50%;
   }

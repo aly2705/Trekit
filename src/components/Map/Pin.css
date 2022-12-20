@@ -1,0 +1,26 @@
+.leaflet-popup-content-wrapper {
+  width: fit-content;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+/* .leaflet-popup-tip-container {
+} */
+
+.leaflet-popup {
+  margin-bottom: 5.5rem;
+  margin-left: 1px;
+}
+
+.leaflet-popup-content img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
