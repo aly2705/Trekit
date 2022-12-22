@@ -48,7 +48,9 @@ const AddNewForm = ({ isVisible, onClose: closeFormHandler, coords }) => {
           <label htmlFor="country">Country</label>
           <input type="text" id="country" required ref={countryInputRef} />
         </div>
-        <div className={classes.form__group}>
+        <div
+          className={`${classes.form__group} ${classes["form__group--img"]}`}
+        >
           <label htmlFor="img-url">Image URL</label>
           <input type="text" id="img-url" ref={imageInputRef} />
         </div>

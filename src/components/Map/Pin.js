@@ -20,7 +20,7 @@ const Pin = ({ trip, onOpenOverview }) => {
     >
       <Popup>
         <img src={trip.imageUrl} alt="city" onClick={openOverviewHandler} />
-        <span>
+        <span onClick={openOverviewHandler}>
           {trip.city}, {trip.country}
         </span>
       </Popup>

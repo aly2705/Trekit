@@ -1,7 +1,7 @@
 .form {
   width: 100%;
   height: 40rem;
-  padding: 4rem 5rem;
+  padding: 4rem 6rem;
   font-size: 1.6rem;
 
   display: grid;
@@ -54,12 +54,6 @@
   color: var(--color-text-secondary);
 }
 
-.form__group textarea {
-  resize: none;
-  width: 100%;
-  height: 10rem;
-}
-
 .form__group input,
 .form__group textarea {
   font-size: 1.6rem;
@@ -78,15 +72,24 @@
   border-color: var(--color-primary-tint);
 }
 
+.form__group textarea {
+  resize: none;
+  width: 100%;
+  height: 10rem;
+}
+
 @media only screen and (max-width: 37.5em) {
   .form {
-    grid-template-columns: 1fr;
-    height: 70vh;
-    padding: 4rem 6rem;
+    grid-template-columns: 1fr 1fr;
+    height: 60vh;
+    padding: 5rem 6rem 6rem 6rem;
+  }
+  .form__group--img {
+    grid-column: 1 / -1;
   }
 }
 @media only screen and (max-width: 31.25em) {
   .form {
-    padding: 4rem 5rem;
+    padding: 5rem 5rem 6rem 5rem;
   }
 }

@@ -25,7 +25,7 @@ const Map = () => {
 
   const addNewHandler = (position) => {
     const location = [position.lat, position.lng];
-    setFormIsVisible(true);
+    if (!tripDetails) setFormIsVisible(true);
     setNewCoords(location);
   };
   const closeFormHandler = () => {
@@ -37,6 +37,11 @@ const Map = () => {
   const closeOverviewHandler = () => {
     setTripDetails(null);
     setFormIsVisible(false);
+  };
+  const openEditFormHandler = () => {
+    setTripDetails(null);
+    // Make an option for an editing form
+    setFormIsVisible(true);
   };
 
   return (
@@ -59,7 +64,11 @@ const Map = () => {
         isVisible={formIsVisible}
         onClose={closeFormHandler}
       />
-      <TripOverview trip={tripDetails} onClose={closeOverviewHandler} />
+      <TripOverview
+        trip={tripDetails}
+        onClose={closeOverviewHandler}
+        onOpenEditForm={openEditFormHandler}
+      />
     </MapContainer>
   );
 };
