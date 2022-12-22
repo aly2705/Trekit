@@ -1,0 +1,72 @@
+.login {
+  color: var(--color-text-secondary);
+  min-width: 32rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.login button {
+  margin: 1.5rem 0 1.5rem 0;
+}
+
+.login h2 {
+  color: var(--color-grey-4);
+  font-size: 3.2rem;
+}
+.login p,
+.login__change {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.login__change a {
+  text-decoration: none;
+  color: var(--color-primary-shade);
+  font-weight: 600;
+}
+
+.login__group {
+  display: grid;
+  margin-bottom: 1.5rem;
+}
+
+.login__group label {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.login__group input {
+  font-size: 1.6rem;
+  font-family: inherit;
+  border: 2px solid var(--color-grey-3);
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.login__group input:focus {
+  border-color: var(--color-primary-tint);
+}
+
+.login__radio {
+  display: flex;
+  justify-content: space-between;
+}
+.login__radio input {
+  margin-right: 0.5rem;
+}
+
+@media only screen and (max-width: 58.125em) {
+  .login {
+    min-width: 40rem;
+  }
+}
+
+@media only screen and (max-width: 37.5em) {
+  .login {
+    min-width: 30rem;
+  }
+}

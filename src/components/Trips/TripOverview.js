@@ -50,9 +50,7 @@ const TripOverview = ({ trip, onClose, onOpenEditForm }) => {
               <span>{trip.endDate}</span>
             </div>
           </div>
-          <div className={classes.overview__description}>
-            {trip.description}
-          </div>
+          <p className={classes.overview__description}>{trip.description}</p>
         </div>
       )}
     </BottomSection>

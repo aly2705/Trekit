@@ -9,7 +9,7 @@ const trip = {
   startDate: "21 August 2021",
   endDate: "08 Sepetmber 2021",
   description:
-    "Sed pulvinar ante ac dui aliquet dictum. Donec viverra, felis non eleifend semper, ligula lorem sagittis purus, et fermentum diam enim quis ex. Etiam sit amet varius metus. Praesent id tincidunt sem, vitae auctor tortor. In finibus, sapien a posuere iaculis, erat leo hendrerit nulla, et ornare ante odio vel neque. Sed pulvinar ante ac dui aliquet dictum. Donec viverra, felis non eleifend semper, ligula lorem sagittis purus, et fermentum diam enim quis ex. Etiam sit amet varius metus. Praesent id tincidunt sem, vitae auctor tortor. In finibus, sapien a posuere iaculis, erat leo hendrerit nulla, et ornare ante odio vel neque. ",
+    "Sed pulvinar ante ac dui aliquet dictum. Donec viverra, felis non eleifend semper, ligula lorem sagittis purus, et fermentum diam enim quis ex. Etiam sit amet varius metus. Praesent id tincidunt sem, vitae auctor tortor. In finibus, sapien a posuere iaculis, erat leo hendrerit nulla, et ornare ante odio vel neque.  ",
 };
 export const trips = [
   trip,

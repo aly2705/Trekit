@@ -1,4 +1,5 @@
 import classes from "./SidebarList.module.css";
+import { NavLink } from "react-router-dom";
 
 const SidebarList = ({ isOpen }) => {
   return (
@@ -10,7 +11,7 @@ const SidebarList = ({ isOpen }) => {
         <button>Add New Trip</button>
       </li>
       <li>
-        <button>Account settings</button>
+        <NavLink to="/account">Account settings</NavLink>
       </li>
     </ul>
   );

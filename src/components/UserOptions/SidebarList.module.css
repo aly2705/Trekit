@@ -6,7 +6,9 @@
   padding: 4rem 0;
 }
 
-.sidebar__list button {
+.sidebar__list button,
+.sidebar__list a {
+  display: block;
   padding: 1.4rem;
   border: none;
   outline: none;
@@ -19,6 +21,12 @@
   transition: all 0.3s;
 }
 
-.sidebar__list button:hover {
+.sidebar__list button:hover,
+.sidebar__list a:hover {
   color: var(--color-text-primary);
+}
+
+.sidebar__list a {
+  text-decoration: none;
+  color: var(--color-text-secondary);
 }
