@@ -13,6 +13,15 @@ const TripOverview = ({ trip, onClose, onOpenEditForm }) => {
           <div className={classes.overview__btns}>
             <button
               type="button"
+              className={classes.overview__delete}
+              onClick={onClose}
+            >
+              <svg>
+                <use href={`${icons}#icon-bin`}></use>
+              </svg>
+            </button>
+            <button
+              type="button"
               className={classes.overview__edit}
               onClick={openEditFormHandler}
             >

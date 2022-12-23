@@ -28,11 +28,17 @@
 }
 
 .overview__close,
-.overview__edit {
+.overview__edit,
+.overview__delete {
   background-color: transparent;
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+.overview__delete svg {
+  width: 3.3rem;
+  height: 2.2rem;
 }
 
 .overview__close svg {

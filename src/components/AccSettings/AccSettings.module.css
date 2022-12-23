@@ -1,5 +1,5 @@
 .settings {
-  padding: 4rem;
+  padding: 0 4rem;
 }
 
 .settings form {
@@ -46,4 +46,30 @@
   display: flex;
   justify-content: flex-start;
   gap: 4rem;
+}
+
+@media only screen and (max-width: 58.125em) {
+  .settings {
+    padding: 10rem;
+  }
+
+  .settings form {
+    column-gap: 6rem;
+  }
+
+  .settings__group input {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 37.5em) {
+  .settings {
+    padding: 6rem;
+  }
+}
+
+@media only screen and (max-width: 31.25em) {
+  .settings form {
+    grid-template-columns: 1fr;
+  }
 }
