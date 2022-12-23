@@ -1,0 +1,49 @@
+.settings {
+  padding: 4rem;
+}
+
+.settings form {
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.settings h3 {
+  grid-column: 1/-1;
+  margin-bottom: 2rem;
+}
+
+.settings button {
+  justify-self: start;
+  margin-top: 1rem;
+}
+
+.settings__group {
+  display: grid;
+  justify-items: start;
+  margin-bottom: 1rem;
+}
+
+.settings__group label {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.settings__group input {
+  font-size: 1.6rem;
+  font-family: inherit;
+  border: 2px solid var(--color-grey-3);
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: all 0.3s;
+  width: 70%;
+}
+
+.settings__radio {
+  display: flex;
+  justify-content: flex-start;
+  gap: 4rem;
+}
