@@ -39,11 +39,7 @@ const TripOverview = ({ trip, onClose, onOpenEditForm }) => {
               </svg>
             </button>
           </div>
-          <img
-            src={trip.imageUrl}
-            alt="city"
-            className={classes.overview__img}
-          />
+          <img src={trip.image} alt="city" className={classes.overview__img} />
           <h2>
             <span>
               {trip.city}, {trip.country}

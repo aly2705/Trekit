@@ -2,10 +2,13 @@ import "leaflet/dist/leaflet.css";
 import "./Map.css";
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 import AddNewForm from "../Trips/AddNewForm";
-import { useState } from "react";
-import { trips } from "../../store/trips"; // will be fetched
+import { useContext, useEffect, useState } from "react";
+import TripContext from "../../store/trip-context"; // will be fetched
 import Pin from "./Pin";
 import TripOverview from "../Trips/TripOverview";
+import useAJAX from "../../hooks/useAJAX";
+import { API_URL } from "../../helpers/config";
+import AuthContext from "../../store/auth-context";
 
 const ClickGetCoords = ({ onClick }) => {
   useMapEvents({
@@ -17,11 +20,27 @@ const ClickGetCoords = ({ onClick }) => {
 };
 
 const Map = () => {
-  //const [locations, setLocations] = useState(DUMMY__LOCATIONS);
-  //Will fetch data from db
+  const { trips, setTrips } = useContext(TripContext);
+  const { token } = useContext(AuthContext);
   const [newCoords, setNewCoords] = useState(null);
   const [formIsVisible, setFormIsVisible] = useState(false);
   const [tripDetails, setTripDetails] = useState(null);
+  const { sendRequest: fetchTrips, isLoading } = useAJAX();
+
+  useEffect(() => {
+    const configObj = {
+      url: `${API_URL}/trips`,
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const setTripsToFetchedData = (data) => {
+      const trips = data.data.trips;
+      setTrips(trips);
+    };
+    fetchTrips(configObj, setTripsToFetchedData);
+  }, [token, fetchTrips, setTrips]);
 
   const addNewHandler = (position) => {
     const location = [position.lat, position.lng];
@@ -56,9 +75,10 @@ const Map = () => {
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
       />
       <ClickGetCoords onClick={addNewHandler} />
-      {trips.map((trip, i) => (
-        <Pin trip={trip} key={i} onOpenOverview={openTripOverview} />
-      ))}
+      {trips.length > 0 &&
+        trips.map((trip, i) => (
+          <Pin trip={trip} key={i} onOpenOverview={openTripOverview} />
+        ))}
       <AddNewForm
         coords={newCoords}
         isVisible={formIsVisible}
@@ -69,6 +89,11 @@ const Map = () => {
         onClose={closeOverviewHandler}
         onOpenEditForm={openEditFormHandler}
       />
+      {isLoading && (
+        <div className="loading-spinner-container">
+          <div className="loading-spinner"></div>
+        </div>
+      )}
     </MapContainer>
   );
 };

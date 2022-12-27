@@ -4,12 +4,18 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import { AuthContextProvider } from "./store/auth-context";
+import { TripContextProvider } from "./store/trip-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <AuthContextProvider>
+    <TripContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </TripContextProvider>
+  </AuthContextProvider>
 );
 
 // If you want your app to work offline and load faster, you can change
