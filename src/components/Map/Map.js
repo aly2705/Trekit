@@ -10,10 +10,12 @@ import useAJAX from "../../hooks/useAJAX";
 import { API_URL } from "../../helpers/config";
 import AuthContext from "../../store/auth-context";
 
-const ClickGetCoords = ({ onClick }) => {
+const ClickGetCoords = ({ onClick, formIsVisible }) => {
   useMapEvents({
     click(e) {
-      onClick(e.latlng);
+      if (!formIsVisible) {
+        onClick(e.latlng);
+      }
     },
   });
   return null;
@@ -74,7 +76,7 @@ const Map = () => {
         attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
       />
-      <ClickGetCoords onClick={addNewHandler} />
+      <ClickGetCoords onClick={addNewHandler} formIsVisible={formIsVisible} />
       {trips.length > 0 &&
         trips.map((trip, i) => (
           <Pin trip={trip} key={i} onOpenOverview={openTripOverview} />

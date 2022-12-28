@@ -48,11 +48,23 @@ const TripOverview = ({ trip, onClose, onOpenEditForm }) => {
           <div className={classes.overview__dates}>
             <div className={classes.overview__date}>
               <span>Start date:</span>
-              <span>{trip.startDate}</span>
+              <span>
+                {new Date(trip.startDate).toLocaleString(navigator.language, {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </span>
             </div>
             <div className={classes.overview__date}>
               <span>End date:</span>
-              <span>{trip.endDate}</span>
+              <span>
+                {new Date(trip.endDate).toLocaleString(navigator.language, {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </span>
             </div>
           </div>
           <p className={classes.overview__description}>{trip.description}</p>

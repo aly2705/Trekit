@@ -63,7 +63,6 @@ body {
 .error {
   color: #b91c1c;
   font-weight: 600;
-  max-width: 32rem;
 }
 
 .loading-spinner-container {

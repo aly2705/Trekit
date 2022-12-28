@@ -3,6 +3,7 @@ import React, { useCallback, useState } from "react";
 const TripContext = React.createContext({
   trips: [],
   setTrips: (trips) => {},
+  addNewTrip: (trip) => {},
 });
 
 export const TripContextProvider = (props) => {
@@ -12,8 +13,18 @@ export const TripContextProvider = (props) => {
     setTrips(fetchedTrips);
   }, []);
 
+  const addNewTripHandler = (trip) => {
+    setTrips((prev) => [...prev, trip]);
+  };
+
   return (
-    <TripContext.Provider value={{ trips: trips, setTrips: tripHandler }}>
+    <TripContext.Provider
+      value={{
+        trips: trips,
+        setTrips: tripHandler,
+        addNewTrip: addNewTripHandler,
+      }}
+    >
       {props.children}
     </TripContext.Provider>
   );
