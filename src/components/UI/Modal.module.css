@@ -1,0 +1,19 @@
+.modal {
+  position: fixed;
+  top: 35vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12000;
+  background-color: var(--color-white);
+  padding: 4rem;
+  min-width: 50rem;
+  border-radius: 1rem;
+}
+
+@media only screen and (max-width: 31.25em) {
+  .modal {
+    min-width: unset;
+    width: 80%;
+    padding: 3rem;
+  }
+}

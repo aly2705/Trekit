@@ -17,9 +17,7 @@ const AccPage = () => {
         <Profile />
         <div className={classes.account__buttons}>
           <Button>Logout</Button>
-          <Button className={classes["account__btn-secondary"]}>
-            Delete Account
-          </Button>
+          <Button secondaryColor={true}>Delete Account</Button>
         </div>
       </div>
       <AccSettings />

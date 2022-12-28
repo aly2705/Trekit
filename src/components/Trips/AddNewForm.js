@@ -63,13 +63,21 @@ const AddNewForm = ({ isVisible, onClose: closeFormHandler, coords }) => {
         coords,
       },
     };
-    const addNewToContext = (APIData) => {
+    const addNewToContextAndCloseForm = (APIData) => {
       const newTrip = APIData.data.trips;
       console.log(APIData.data.trips);
       tripContext.addNewTrip(newTrip);
+
+      cityInputRef.current.value = "";
+      countryInputRef.current.value = "";
+      imageInputRef.current.value = "";
+      startDateInputRef.current.value = "";
+      endDateInputRef.current.value = "";
+      descInputRef.current.value = "";
+      closeFormHandler();
     };
 
-    postNewTrip(reqConfig, addNewToContext);
+    postNewTrip(reqConfig, addNewToContextAndCloseForm);
   };
 
   return (

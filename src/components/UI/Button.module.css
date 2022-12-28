@@ -15,3 +15,11 @@
 .button:hover {
   background-color: var(--color-primary-shade);
 }
+
+.button-secondary {
+  background-color: var(--color-grey-4);
+}
+
+.button-secondary:hover {
+  background-color: var(--color-black);
+}
