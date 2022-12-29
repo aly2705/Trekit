@@ -59,6 +59,10 @@
   margin-right: 0.5rem;
 }
 
+.login__error {
+  max-width: 32rem;
+}
+
 @media only screen and (max-width: 58.125em) {
   .login {
     min-width: 40rem;

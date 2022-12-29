@@ -33,8 +33,7 @@ const Login = () => {
 
   const loginHandler = (APIdata) => {
     console.log(APIdata);
-    authContext.onNewUserData(APIdata.user);
-    authContext.onLogin(APIdata.token);
+    authContext.onLogin(APIdata.token, APIdata.expiresIn, APIdata.user);
     navigate("/map");
   };
 
@@ -112,6 +111,7 @@ const Login = () => {
               name="gender"
               value="Male"
               ref={maleRef}
+              defaultChecked
             />
             <label htmlFor="male">Male</label>
           </div>
@@ -123,7 +123,7 @@ const Login = () => {
               value="Female"
               ref={femaleRef}
             />
-            <label htmlFor="male">Female</label>
+            <label htmlFor="female">Female</label>
           </div>
         </div>
       )}
@@ -142,7 +142,9 @@ const Login = () => {
           <div className="loading-spinner"></div>
         </div>
       )}
-      {error && <p className="error">{error.message}</p>}
+      {error && (
+        <p className={`error ${classes.login__error}`}>{error.message}</p>
+      )}
     </form>
   );
 };

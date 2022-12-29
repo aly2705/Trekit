@@ -27,6 +27,7 @@ const Map = () => {
   const [newCoords, setNewCoords] = useState(null);
   const [formIsVisible, setFormIsVisible] = useState(false);
   const [tripDetails, setTripDetails] = useState(null);
+  const [tripEdited, setTripEdited] = useState(null);
   const { sendRequest: fetchTrips, isLoading } = useAJAX();
 
   useEffect(() => {
@@ -51,6 +52,7 @@ const Map = () => {
   };
   const closeFormHandler = () => {
     setFormIsVisible(false);
+    setTripEdited(null);
   };
   const openTripOverview = (trip) => {
     setTripDetails(trip);
@@ -59,10 +61,11 @@ const Map = () => {
     setTripDetails(null);
     setFormIsVisible(false);
   };
-  const openEditFormHandler = () => {
+  const openEditFormHandler = (tripId) => {
     setTripDetails(null);
     // Make an option for an editing form
     setFormIsVisible(true);
+    setTripEdited(tripId);
   };
 
   return (
@@ -85,6 +88,7 @@ const Map = () => {
         coords={newCoords}
         isVisible={formIsVisible}
         onClose={closeFormHandler}
+        isEditing={tripEdited}
       />
       <TripOverview
         trip={tripDetails}

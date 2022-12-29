@@ -5,6 +5,7 @@ const TripContext = React.createContext({
   setTrips: (trips) => {},
   addNewTrip: (trip) => {},
   deleteTrip: (tripId) => {},
+  updateTrip: (trip) => {},
 });
 
 export const TripContextProvider = (props) => {
@@ -16,6 +17,17 @@ export const TripContextProvider = (props) => {
 
   const addNewTripHandler = (trip) => {
     setTrips((prev) => [...prev, trip]);
+  };
+
+  const updateTripHandler = (updTrip) => {
+    setTrips((prev) => {
+      const newTrips = prev.map((trip) => {
+        if (trip._id === updTrip._id) {
+          return updTrip;
+        } else return trip;
+      });
+      return newTrips;
+    });
   };
 
   const deleteTripHandler = (tripId) => {
@@ -32,6 +44,7 @@ export const TripContextProvider = (props) => {
         setTrips: tripHandler,
         addNewTrip: addNewTripHandler,
         deleteTrip: deleteTripHandler,
+        updateTrip: updateTripHandler,
       }}
     >
       {props.children}

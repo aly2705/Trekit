@@ -35,6 +35,7 @@
 @media only screen and (max-width: 58.125em) {
   .auth {
     grid-template-columns: 1fr;
+    padding-top: 6rem;
     /* grid-template-rows: max-content auto; */
   }
   .auth__form {

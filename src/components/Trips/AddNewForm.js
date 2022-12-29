@@ -7,17 +7,54 @@ import useAJAX from "../../hooks/useAJAX";
 import { API_URL } from "../../helpers/config";
 import AuthContext from "../../store/auth-context";
 import TripContext from "../../store/trip-context";
+import { formatDate } from "../../helpers/helpers";
 
-const AddNewForm = ({ isVisible, onClose: closeFormHandler, coords }) => {
+const AddNewForm = ({ isVisible, onClose, coords, isEditing: isEditingId }) => {
   const cityInputRef = useRef();
   const countryInputRef = useRef();
   const imageInputRef = useRef();
   const startDateInputRef = useRef();
   const endDateInputRef = useRef();
   const descInputRef = useRef();
-  const { sendRequest: postNewTrip, isLoading, error, setError } = useAJAX();
+  const { sendRequest, isLoading, error, setError } = useAJAX();
   const { token } = useContext(AuthContext);
   const tripContext = useContext(TripContext);
+
+  const trip = isEditingId
+    ? tripContext.trips.find((trip) => trip._id === isEditingId)
+    : undefined;
+
+  const clearForm = () => {
+    cityInputRef.current.value = "";
+    countryInputRef.current.value = "";
+    imageInputRef.current.value = "";
+    startDateInputRef.current.value = "";
+    endDateInputRef.current.value = "";
+    descInputRef.current.value = "";
+  };
+
+  if (isEditingId) {
+    cityInputRef.current.value = trip.city;
+    countryInputRef.current.value = trip.country;
+    imageInputRef.current.value = trip.image;
+    startDateInputRef.current.value = formatDate(trip.startDate);
+    endDateInputRef.current.value = formatDate(trip.endDate);
+    descInputRef.current.value = trip.description || "";
+  }
+
+  const changeContextAndCloseForm = (APIData) => {
+    if (isEditingId) {
+      const updatedTrip = APIData.data.updatedTrip;
+      tripContext.updateTrip(updatedTrip);
+    } else {
+      const newTrip = APIData.data.trip;
+      console.log(APIData.data.trip);
+      tripContext.addNewTrip(newTrip);
+    }
+
+    clearForm();
+    closeFormHandler();
+  };
 
   const submitFormHandler = (e) => {
     e.preventDefault();
@@ -29,61 +66,72 @@ const AddNewForm = ({ isVisible, onClose: closeFormHandler, coords }) => {
     const enteredEndDate = endDateInputRef.current.value;
     const enteredDescription = descInputRef.current.value.trim();
 
-    console.log(
-      enteredCity,
-      enteredCountry,
-      enteredImage,
-      enteredStartDate,
-      enteredEndDate,
-      enteredDescription,
-      coords
-    );
     // Date validation
     if (
       new Date(enteredStartDate).getTime() > new Date(enteredEndDate).getTime()
     ) {
-      setError("Start date must be before end date");
+      console.log("Will set error");
+      setError(new Error("Start date must be before end date"));
       return;
     }
-    //Prepare data for request
-    const reqConfig = {
-      url: `${API_URL}/trips`,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: {
-        city: enteredCity,
-        country: enteredCountry,
-        startDate: enteredStartDate,
-        endDate: enteredEndDate,
-        image: enteredImage,
-        description: enteredDescription || undefined,
-        coords,
-      },
-    };
-    const addNewToContextAndCloseForm = (APIData) => {
-      const newTrip = APIData.data.trips;
-      console.log(APIData.data.trips);
-      tripContext.addNewTrip(newTrip);
 
-      cityInputRef.current.value = "";
-      countryInputRef.current.value = "";
-      imageInputRef.current.value = "";
-      startDateInputRef.current.value = "";
-      endDateInputRef.current.value = "";
-      descInputRef.current.value = "";
-      closeFormHandler();
-    };
+    if (!isEditingId) {
+      //Prepare data for post request
+      const reqConfig = {
+        url: `${API_URL}/trips`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: {
+          city: enteredCity,
+          country: enteredCountry,
+          startDate: enteredStartDate,
+          endDate: enteredEndDate,
+          image: enteredImage,
+          description: enteredDescription || undefined,
+          coords,
+        },
+      };
 
-    postNewTrip(reqConfig, addNewToContextAndCloseForm);
+      sendRequest(reqConfig, changeContextAndCloseForm);
+    } else if (isEditingId) {
+      // Prepare data for patch request
+      const reqConfig = {
+        url: `${API_URL}/trips/${isEditingId}`,
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: {
+          city: enteredCity !== trip.city ? enteredCity : undefined,
+          country: enteredCountry !== trip.country ? enteredCountry : undefined,
+          startDate: enteredStartDate,
+          endDate: enteredEndDate,
+          image: enteredImage !== trip.image ? enteredEndDate : undefined,
+          description:
+            enteredDescription !== trip.description
+              ? enteredDescription
+              : undefined,
+        },
+      };
+
+      sendRequest(reqConfig, changeContextAndCloseForm);
+    }
+  };
+
+  const closeFormHandler = () => {
+    setError(null);
+    clearForm();
+    onClose();
   };
 
   return (
     <BottomSection isVisible={isVisible}>
       <form className={classes.form} onSubmit={submitFormHandler}>
-        <h2>Add new trip</h2>
+        <h2>{!!isEditingId ? "Edit trip" : "Add new trip"}</h2>
         <div className={classes.form__group}>
           <label htmlFor="city">City</label>
           <input type="text" id="city" required ref={cityInputRef} />
@@ -114,7 +162,7 @@ const AddNewForm = ({ isVisible, onClose: closeFormHandler, coords }) => {
           <p className={`error ${classes.form__error}`}>{error.message}</p>
         )}
         <Button className={classes.form__submit} type="submit">
-          Add Trip
+          {!!isEditingId ? "Edit trip" : "Add trip"}
         </Button>
         <button
           type="button"

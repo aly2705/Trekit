@@ -16,19 +16,6 @@
   height: 12rem;
 }
 
-.account__profile {
-  align-self: start;
-  /* margin-top: 12rem; */
-}
-
-.account__buttons {
-  margin-top: 2rem;
-  display: grid;
-  gap: 1rem;
-  justify-items: center;
-}
-
-
 .account__back {
   position: absolute;
   top: 2rem;

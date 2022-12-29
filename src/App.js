@@ -7,10 +7,18 @@ import AuthContext from "./store/auth-context";
 
 function App() {
   const isLoggedIn = useContext(AuthContext).isLoggedIn;
+  console.log(isLoggedIn);
+
   return (
     <Routes>
-      <Route path="/*" element={<Navigate to="/auth?form=login" />} />
-      <Route path="/auth" element={<AuthPage />} />
+      {!localStorage.getItem("token") && (
+        <Route path="/*" element={<Navigate to="/auth?form=login" />} />
+      )}
+      {localStorage.getItem("token") && (
+        <Route path="/*" element={<HomePage />} />
+      )}
+
+      {!isLoggedIn && <Route path="/auth" element={<AuthPage />} />}
       {isLoggedIn && <Route path="/map" element={<HomePage />} />}
 
       {isLoggedIn && <Route path="/account" element={<AccPage />} />}
