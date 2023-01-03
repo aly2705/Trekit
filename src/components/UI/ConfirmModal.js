@@ -2,16 +2,16 @@ import Modal from "./Modal";
 import Button from "./Button";
 import classes from "./ConfirmModal.module.css";
 
-const ConfirmModal = (props) => {
+const ConfirmModal = ({ message, onClose, onConfirm }) => {
   return (
-    <Modal className={classes.confirm} onClose={props.onClose}>
+    <Modal className={classes.confirm} onClose={onClose}>
       <h2>Are you sure?</h2>
-      <p>{props.message}</p>
+      <p>{message}</p>
       <div className={classes.confirm__btns}>
-        <Button secondary={true} onClick={props.onClose}>
+        <Button secondary={true} onClick={onClose}>
           Cancel
         </Button>
-        <Button onClick={props.onConfirm}>Confirm</Button>
+        <Button onClick={onConfirm}>Confirm</Button>
       </div>
     </Modal>
   );

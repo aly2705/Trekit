@@ -1,16 +1,25 @@
 import classes from "./AccountProfile.module.css";
 import Profile from "./Profile";
 import Button from "../UI/Button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import { API_URL } from "../../helpers/config";
 import useAJAX from "../../hooks/useAJAX";
+import ConfirmModal from "../UI/ConfirmModal";
 
 const AccountProfile = () => {
   const authContext = useContext(AuthContext);
   const { sendRequest: deleteAccRequest, error, isLoading } = useAJAX();
+  const [isConfirming, setIsConfirming] = useState(false);
   const logoutHandler = () => {
     authContext.onLogout();
+  };
+
+  const abortActionHandler = () => {
+    setIsConfirming(false);
+  };
+  const confirmDeleteHandler = () => {
+    setIsConfirming(true);
   };
 
   const deleteAccountHandler = () => {
@@ -28,7 +37,7 @@ const AccountProfile = () => {
       <Profile />
       <div className={classes.account__buttons}>
         <Button onClick={logoutHandler}>Logout</Button>
-        <Button secondary={true} onClick={deleteAccountHandler}>
+        <Button secondary={true} onClick={confirmDeleteHandler}>
           Delete Account
         </Button>
       </div>
@@ -38,6 +47,13 @@ const AccountProfile = () => {
         <div className="loading-spinner-container">
           <div className="loading-spinner"></div>
         </div>
+      )}
+      {isConfirming && (
+        <ConfirmModal
+          message="Your account will be permanently deleted. This action cannot be undone."
+          onConfirm={deleteAccountHandler}
+          onClose={abortActionHandler}
+        />
       )}
     </div>
   );

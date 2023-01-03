@@ -18,7 +18,7 @@ const Menu = () => {
       <button onClick={clickHandler} className={buttonClasses}>
         <span className={classes.bar}></span>
       </button>
-      <Sidebar isOpen={isOpen} />
+      <Sidebar isOpen={isOpen} onClose={clickHandler} />
       {ReactDOM.createPortal(
         <Overlay visible={isOpen} onClose={clickHandler} />,
         document.getElementById("overlays")

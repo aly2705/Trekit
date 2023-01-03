@@ -5,6 +5,7 @@
   cursor: pointer;
   padding: 0 0.2rem;
   z-index: 100000;
+  height: 3.5rem;
 }
 .bar {
   display: block;

@@ -110,7 +110,7 @@ const AddNewForm = ({ isVisible, onClose, coords, isEditing: isEditingId }) => {
           country: enteredCountry !== trip.country ? enteredCountry : undefined,
           startDate: enteredStartDate,
           endDate: enteredEndDate,
-          image: enteredImage !== trip.image ? enteredEndDate : undefined,
+          image: enteredImage !== trip.image ? enteredImage : undefined,
           description:
             enteredDescription !== trip.description
               ? enteredDescription

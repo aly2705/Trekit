@@ -60,7 +60,7 @@ export const AuthContextProvider = (props) => {
 
   const setUserHandler = (user) => {
     setUserData(user);
-    localStorage.setItem("user", user);
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   return (

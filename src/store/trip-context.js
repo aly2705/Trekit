@@ -2,14 +2,18 @@ import React, { useCallback, useState } from "react";
 
 const TripContext = React.createContext({
   trips: [],
+  showAll: {},
   setTrips: (trips) => {},
   addNewTrip: (trip) => {},
   deleteTrip: (tripId) => {},
   updateTrip: (trip) => {},
+  showAllTrips: () => {},
+  endShowAll: () => {},
 });
 
 export const TripContextProvider = (props) => {
   const [trips, setTrips] = useState([]);
+  const [showAll, setShowAll] = useState(false);
 
   const tripHandler = useCallback((fetchedTrips) => {
     setTrips(fetchedTrips);
@@ -37,14 +41,24 @@ export const TripContextProvider = (props) => {
     });
   };
 
+  const showAllTrips = () => {
+    setShowAll(true);
+  };
+  const endShowAll = () => {
+    setShowAll(false);
+  };
+
   return (
     <TripContext.Provider
       value={{
         trips: trips,
+        showAll,
         setTrips: tripHandler,
         addNewTrip: addNewTripHandler,
         deleteTrip: deleteTripHandler,
         updateTrip: updateTripHandler,
+        showAllTrips: showAllTrips,
+        endShowAll,
       }}
     >
       {props.children}

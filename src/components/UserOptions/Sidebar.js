@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const logoutHandler = () => {
@@ -20,7 +20,7 @@ const Sidebar = ({ isOpen }) => {
   return (
     <aside className={sidebarClasses}>
       <Profile />
-      <SidebarList />
+      <SidebarList onClose={onClose} />
       <Button onClick={logoutHandler}>Logout</Button>
     </aside>
   );

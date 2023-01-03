@@ -1,14 +1,15 @@
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
-import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import AddNewForm from "../Trips/AddNewForm";
 import { useContext, useEffect, useState } from "react";
-import TripContext from "../../store/trip-context"; // will be fetched
+import TripContext from "../../store/trip-context";
 import Pin from "./Pin";
 import TripOverview from "../Trips/TripOverview";
 import useAJAX from "../../hooks/useAJAX";
 import { API_URL } from "../../helpers/config";
 import AuthContext from "../../store/auth-context";
+import Leaflet from "leaflet";
 
 const ClickGetCoords = ({ onClick, formIsVisible }) => {
   useMapEvents({
@@ -18,6 +19,21 @@ const ClickGetCoords = ({ onClick, formIsVisible }) => {
       }
     },
   });
+  return null;
+};
+const ShowAllTrips = ({ trips }) => {
+  const map = useMap();
+  const tripContext = useContext(TripContext);
+
+  useEffect(() => {
+    if (tripContext.showAll && trips.length) {
+      const markers = trips.map((trip) => Leaflet.marker(trip.coords));
+      const group = new Leaflet.featureGroup(markers);
+      map.fitBounds(group.getBounds());
+      tripContext.endShowAll();
+    }
+  });
+
   return null;
 };
 
@@ -80,6 +96,7 @@ const Map = () => {
         url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
       />
       <ClickGetCoords onClick={addNewHandler} formIsVisible={formIsVisible} />
+      <ShowAllTrips trips={trips} />
       {trips.length > 0 &&
         trips.map((trip, i) => (
           <Pin trip={trip} key={i} onOpenOverview={openTripOverview} />
