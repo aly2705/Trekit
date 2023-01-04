@@ -11,7 +11,7 @@ Trekit is a demo fullstack web app, built as a practice project for some backend
 
 ## Useful links
 
-- [Live Demo](https://trekit-app.alexandrasimion.com)
+- [Live Demo](https://trekit-app.netlify.app)
 - [API Repository & Documentation](https://github.com/aly2705/Trekit-API)
 
 **WARNING⚠️:** The demo app might be slow due to the hosting service!
